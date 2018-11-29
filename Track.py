@@ -4,7 +4,7 @@ import sqlite3
 conn=sqlite3.connect('trackdb.sqlite')
 cur=conn.cursor()  #Database handler
 
-#Make fresh tables using executescript()- used to execute a series of sql commands seperated by ;
+#Create tables using executescript()- used to execute a series of sql commands seperated by ;
 cur.executescript('''
 DROP TABLE IF EXISTS Artist;
 DROP TABLE IF EXISTS Album;
@@ -32,7 +32,7 @@ CREATE TABLE Track (
 	len INTEGER, count INTEGER, rating INTEGER
 	);
 	''')
-#fname=('Library.xml',encoding='utf-8')
+#Insert XML file
 fname=input('Enter file name: ')
 if len(fname)<1: fname='Library.xml'
 
@@ -65,7 +65,7 @@ for entry in all:
 	
 	if name is None or artist is None or album is None or genre is None: continue
 
-	print(name, artist, album, genre, count, rating, length)
+	#print(name, artist, album, genre, count, rating, length)
 
 	cur.execute(''' INSERT OR IGNORE INTO Artist (name) VALUES(?)''',(artist,))
 	
